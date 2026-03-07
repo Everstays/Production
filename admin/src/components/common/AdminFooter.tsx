@@ -1,0 +1,22 @@
+import { USER_APP_URL } from '../../config/api';
+
+export default function AdminFooter() {
+  return (
+    <footer className="bg-white text-neutral-charcoal py-8 border-t border-neutral-border-gray">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+          <a href={USER_APP_URL} className="flex items-center space-x-2 hover:opacity-90">
+            <img src="/logo.png" alt="EverStays Admin" className="w-10 h-10 object-contain" />
+            <span className="text-body font-medium text-primary-coral">EverStays Admin</span>
+          </a>
+          <p className="text-caption text-neutral-medium-gray">
+            © {new Date().getFullYear()} EverStays. Admin dashboard.
+          </p>
+          <a href={USER_APP_URL} target="_blank" rel="noopener noreferrer" className="text-caption text-primary-coral hover:underline">
+            Find a stay on EverStays
+          </a>
+        </div>
+      </div>
+    </footer>
+  );
+}

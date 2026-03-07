@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  body {
+    @apply bg-white text-neutral-charcoal font-sans antialiased;
+  }
+
+  h1 {
+    @apply text-h1 font-semibold;
+  }
+
+  h2 {
+    @apply text-h2 font-semibold;
+  }
+
+  h3 {
+    @apply text-h3 font-medium;
+  }
+
+  p {
+    @apply text-body;
+  }
+
+  input, select, textarea {
+    @apply bg-white border border-neutral-border-gray;
+  }
+}
+
+/* Global image loading shimmer – use with .app-image-shimmer */
+@keyframes app-image-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.app-image-shimmer {
+  background: linear-gradient(
+    90deg,
+    #d4c4b3 0%,
+    #e8e0d8 50%,
+    #d4c4b3 100%
+  );
+  background-size: 200% 100%;
+  animation: app-image-shimmer 1.5s ease-in-out infinite;
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+}

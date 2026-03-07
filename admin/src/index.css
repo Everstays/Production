@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  body {
+    @apply bg-white text-neutral-charcoal font-sans antialiased;
+  }
+
+  h1 {
+    @apply text-h1 font-semibold;
+  }
+
+  h2 {
+    @apply text-h2 font-semibold;
+  }
+
+  h3 {
+    @apply text-h3 font-medium;
+  }
+
+  p {
+    @apply text-body;
+  }
+
+  input, select, textarea {
+    @apply bg-white border border-neutral-border-gray;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+}
