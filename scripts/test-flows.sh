@@ -2,8 +2,8 @@
 # Test User + Admin flows via API
 # Run with: ./scripts/test-flows.sh (from apps/ dir) or bash scripts/test-flows.sh
 
-USER_API="http://localhost:3000"
-ADMIN_API="http://localhost:3000"
+USER_API="http://live.everstays.in"
+ADMIN_API="http://admin.everstays.in"
 
 echo "=== 1. Fetch IDs (property, guide) ==="
 PROP_ID=$(curl -s "$USER_API/properties?limit=1" | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{const j=JSON.parse(d); const p=j.properties||j; console.log(Array.isArray(p)?p[0]?.id:'')})")

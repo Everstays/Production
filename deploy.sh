@@ -66,19 +66,10 @@ deploy_user() {
     echo "Building for production..."
     npm run build
     
-    echo "Checking if PM2 process exists..."
-    if pm2 list | grep -q "everstays-user"; then
-        echo -e "${YELLOW}Restarting existing user frontend process...${NC}"
-        pm2 restart everstays-user
-    else
-        echo -e "${GREEN}Starting new user frontend process...${NC}"
-        if command -v serve &> /dev/null; then
-            pm2 serve dist 5173 --name "everstays-user" --spa
-        else
-            echo "⚠️  'serve' not found. Install with: npm install -g serve"
-            echo "Or configure Nginx to serve the dist folder"
-        fi
-    fi
+    # Nginx serves static files from user/dist
+    # No need for PM2 serve if Nginx is configured
+    echo -e "${GREEN}✅ User frontend built successfully!${NC}"
+    echo -e "${YELLOW}ℹ️  Nginx should be configured to serve everstays.in from user/dist${NC}"
     
     cd ..
     echo -e "${GREEN}✅ User frontend deployed successfully!${NC}"
@@ -95,19 +86,10 @@ deploy_admin() {
     echo "Building for production..."
     npm run build
     
-    echo "Checking if PM2 process exists..."
-    if pm2 list | grep -q "everstays-admin"; then
-        echo -e "${YELLOW}Restarting existing admin frontend process...${NC}"
-        pm2 restart everstays-admin
-    else
-        echo -e "${GREEN}Starting new admin frontend process...${NC}"
-        if command -v serve &> /dev/null; then
-            pm2 serve dist 5174 --name "everstays-admin" --spa
-        else
-            echo "⚠️  'serve' not found. Install with: npm install -g serve"
-            echo "Or configure Nginx to serve the dist folder"
-        fi
-    fi
+    # Nginx serves static files from admin/dist
+    # No need for PM2 serve if Nginx is configured
+    echo -e "${GREEN}✅ Admin frontend built successfully!${NC}"
+    echo -e "${YELLOW}ℹ️  Nginx should be configured to serve admin.everstays.in from admin/dist${NC}"
     
     cd ..
     echo -e "${GREEN}✅ Admin frontend deployed successfully!${NC}"

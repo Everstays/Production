@@ -12,4 +12,4 @@ export const API_BASE_URL =
 
 export const USER_APP_URL =
   import.meta.env.VITE_USER_APP_URL ||
-  (import.meta.env.PROD ? 'https://everstays.in' : 'https://dev.everstays.in');
+  (import.meta.env.PROD ? 'https://live.everstays.in' : 'https://dev.everstays.in');

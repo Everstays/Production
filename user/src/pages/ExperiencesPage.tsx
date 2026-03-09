@@ -82,7 +82,7 @@ export default function ExperiencesPage() {
       {isAdmin && (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
           <a
-            href="http://localhost:5174?tab=experiences&add=true"
+            href="http://api.everstays.in?tab=experiences&add=true"
             className="flex items-center justify-center gap-2 px-6 py-4 bg-primary-coral/10 border-2 border-primary-coral/50 rounded-xl hover:bg-primary-coral/20 transition-colors text-primary-coral font-semibold"
           >
             <Plus className="w-5 h-5" />
