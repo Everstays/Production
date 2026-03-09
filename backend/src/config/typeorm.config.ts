@@ -22,10 +22,20 @@ import { ExperienceReview } from '../entities/experience-review.entity';
 
 export const getTypeOrmConfig = (): TypeOrmModuleOptions => {
   const password = process.env.DB_PASSWORD || '';
+  const dbHost = process.env.DB_HOST || 'localhost';
+  
+  // SSL configuration for cloud databases (Neon, Supabase, AWS RDS, etc.)
+  const sslConfig = dbHost.includes('neon.tech') || 
+                    dbHost.includes('aws.neon.tech') || 
+                    dbHost.includes('supabase') ||
+                    dbHost.includes('.rds.amazonaws.com') ||
+                    process.env.DB_SSL === 'true'
+    ? { rejectUnauthorized: false } // Allow self-signed certificates for cloud services
+    : false;
   
   return {
     type: 'postgres',
-    host: process.env.DB_HOST || 'localhost',
+    host: dbHost,
     port: parseInt(process.env.DB_PORT || '5432'),
     username: process.env.DB_USERNAME || 'postgres',
     password: password,
@@ -33,6 +43,7 @@ export const getTypeOrmConfig = (): TypeOrmModuleOptions => {
     entities: [User, Property, Booking, Review, Offer, City, Message, Experience, Contact, Category, Holiday, Guide, Cab, CabRequest, TripPlanItem, TabBadge, GuideReview, GuideBooking, Notification, ExperienceReview],
     synchronize: process.env.NODE_ENV !== 'production',
     logging: process.env.NODE_ENV === 'development',
+    ssl: sslConfig, // Add SSL configuration
     extra: {
       // Handle empty password for local PostgreSQL
       ...(password === '' && { trustLocalhost: true }),

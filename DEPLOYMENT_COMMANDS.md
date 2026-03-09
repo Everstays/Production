@@ -78,7 +78,7 @@ FRONTEND_URL=https://everstays.in,https://admin.everstays.in
 
 ### Frontend .env (optional)
 ```env
-VITE_API_BASE_URL=https://api.everstays.in
+VITE_API_BASE_URL=https://localhost:3000
 ```
 
 ## Nginx Quick Setup
@@ -98,5 +98,5 @@ sudo systemctl restart nginx
 
 ```bash
 sudo apt install certbot python3-certbot-nginx
-sudo certbot --nginx -d api.everstays.in -d everstays.in -d admin.everstays.in
+sudo certbot --nginx -d localhost:3000 -d everstays.in -d admin.everstays.in
 ```

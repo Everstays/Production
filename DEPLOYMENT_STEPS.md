@@ -214,7 +214,7 @@ sudo yum install certbot python3-certbot-nginx
 
 ### Step 3.2: Obtain SSL Certificates
 ```bash
-sudo certbot --nginx -d api.everstays.in -d everstays.in -d www.everstays.in -d admin.everstays.in
+sudo certbot --nginx -d localhost:3000 -d everstays.in -d www.everstays.in -d admin.everstays.in
 ```
 
 Follow prompts and choose to redirect HTTP to HTTPS.
@@ -242,7 +242,7 @@ sudo tail -f /var/log/nginx/error.log
 ```bash
 # Backend API
 curl http://localhost:3000
-curl http://api.everstays.in
+curl http://localhost:3000
 
 # User Frontend (in browser)
 http://everstays.in

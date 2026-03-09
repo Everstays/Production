@@ -76,7 +76,7 @@ Copy the following configuration. **Replace the paths and domains with your actu
 # Backend API - Reverse Proxy
 server {
     listen 80;
-    server_name api.everstays.in;  # Replace with your API domain or IP
+    server_name localhost:3000;  # Replace with your API domain or IP
 
     # Increase timeouts for file uploads
     client_max_body_size 10M;
@@ -193,7 +193,7 @@ Edit the configuration file and update these paths:
 3. **Admin frontend path**: `/path/to/everstays/Production/admin/dist`
    - Replace with: `/home/youruser/everstays/Production/admin/dist` (or your actual path)
 
-4. **Server names**: Replace `api.everstays.in`, `everstays.in`, `admin.everstays.in` with:
+4. **Server names**: Replace `localhost:3000`, `everstays.in`, `admin.everstays.in` with:
    - Your actual domain names, OR
    - Your server IP address, OR
    - `_` (underscore) to accept all domains (for testing)
@@ -276,7 +276,7 @@ sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 ```bash
 curl http://localhost:3000
 # or
-curl http://api.everstays.in
+curl http://localhost:3000
 ```
 
 ### Test User Frontend:
@@ -298,7 +298,7 @@ sudo yum install certbot python3-certbot-nginx
 
 ### Obtain SSL Certificates:
 ```bash
-sudo certbot --nginx -d api.everstays.in -d live.everstays.in -d www.live.everstays.in -d admin.everstays.in
+sudo certbot --nginx -d localhost:3000 -d live.everstays.in -d www.live.everstays.in -d admin.everstays.in
 ```
 
 Follow the prompts to:

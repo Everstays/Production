@@ -101,7 +101,7 @@ cd ../user
 npm install
 
 # Create .env file (optional, for custom API URL)
-# VITE_API_BASE_URL=https://api.everstays.in
+# VITE_API_BASE_URL=https://localhost:3000
 
 # Build for production
 npm run build
@@ -131,7 +131,7 @@ cd ../admin
 npm install
 
 # Create .env file (optional)
-# VITE_API_BASE_URL=https://api.everstays.in
+# VITE_API_BASE_URL=https://localhost:3000
 # VITE_USER_APP_URL=https://everstays.in
 
 # Build for production
@@ -198,7 +198,7 @@ Create `/etc/nginx/sites-available/everstays`:
 # Backend API
 server {
     listen 80;
-    server_name api.everstays.in;
+    server_name localhost:3000;
 
     location / {
         proxy_pass http://localhost:3000;
@@ -270,7 +270,7 @@ server {
 sudo apt install certbot python3-certbot-nginx
 
 # Get SSL certificates
-sudo certbot --nginx -d api.everstays.in -d everstays.in -d www.everstays.in -d admin.everstays.in
+sudo certbot --nginx -d localhost:3000 -d everstays.in -d www.everstays.in -d admin.everstays.in
 
 # Auto-renewal
 sudo certbot renew --dry-run
@@ -316,13 +316,13 @@ FRONTEND_URL=https://live.everstays.in,https://admin.everstays.in,https://www.li
 ### User Frontend (.env)
 
 ```env
-VITE_API_BASE_URL=https://api.everstays.in
+VITE_API_BASE_URL=https://localhost:3000
 ```
 
 ### Admin Frontend (.env)
 
 ```env
-VITE_API_BASE_URL=https://api.everstays.in
+VITE_API_BASE_URL=https://localhost:3000
 VITE_USER_APP_URL=https://everstays.in
 ```
 

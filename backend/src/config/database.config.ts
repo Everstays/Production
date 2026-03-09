@@ -21,9 +21,20 @@ import { GuideBooking } from '../entities/guide-booking.entity';
 
 config();
 
+const dbHost = process.env.DB_HOST || 'localhost';
+
+// SSL configuration for cloud databases (Neon, Supabase, AWS RDS, etc.)
+const sslConfig = dbHost.includes('neon.tech') || 
+                  dbHost.includes('aws.neon.tech') || 
+                  dbHost.includes('supabase') ||
+                  dbHost.includes('.rds.amazonaws.com') ||
+                  process.env.DB_SSL === 'true'
+  ? { rejectUnauthorized: false } // Allow self-signed certificates for cloud services
+  : false;
+
 export const AppDataSource = new DataSource({
   type: 'postgres',
-  host: process.env.DB_HOST || 'localhost',
+  host: dbHost,
   port: parseInt(process.env.DB_PORT || '5432'),
   username: process.env.DB_USERNAME || 'postgres',
   password: process.env.DB_PASSWORD || 'postgres',
@@ -32,4 +43,5 @@ export const AppDataSource = new DataSource({
   migrations: ['src/migrations/*.ts'],
   synchronize: process.env.NODE_ENV !== 'production',
   logging: process.env.NODE_ENV === 'development',
+  ssl: sslConfig, // Add SSL configuration
 });

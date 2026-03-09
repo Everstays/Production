@@ -1,9 +1,9 @@
 /**
  * Backend API base URL.
- * Production: api.everstays.in | Development: dev.everstays.in
+ * Production: localhost:3000 | Development: dev.everstays.in
  * Override via .env for local backend (see .env.example).
  */
-const productionApi = 'https://api.everstays.in';
+const productionApi = 'https://localhost:3000';
 const developmentApi = 'https://dev.everstays.in';
 
 export const API_BASE_URL =
