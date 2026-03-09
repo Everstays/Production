@@ -42,11 +42,11 @@ module.exports = {
     exec_mode: 'fork', // or 'cluster' for load balancing
     env: {
       NODE_ENV: 'development',
-      PORT: 3001
+      PORT: 3000
     },
     env_production: {
       NODE_ENV: 'production',
-      PORT: 3001
+      PORT: 3000
     },
     error_file: './logs/pm2-error.log',
     out_file: './logs/pm2-out.log',
@@ -157,10 +157,10 @@ pm2 monit
 
 ```bash
 # Check if backend is responding
-curl http://localhost:3001
+curl http://localhost:3000
 
 # Or test a specific endpoint
-curl http://localhost:3001/api/health
+curl http://localhost:3000/api/health
 ```
 
 ## Common PM2 Commands
@@ -252,7 +252,7 @@ pm2 set pm2-logrotate:compress true
 ### Application not starting:
 1. Check logs: `pm2 logs everstays-backend`
 2. Verify .env file exists and has correct values
-3. Check if port 3001 is already in use: `netstat -tulpn | grep 3001`
+3. Check if port 3000 is already in use: `netstat -tulpn | grep 3000`
 4. Verify build was successful: `ls -la dist/`
 
 ### PM2 not persisting after reboot:

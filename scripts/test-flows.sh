@@ -3,7 +3,7 @@
 # Run with: ./scripts/test-flows.sh (from apps/ dir) or bash scripts/test-flows.sh
 
 USER_API="http://localhost:3000"
-ADMIN_API="http://localhost:3001"
+ADMIN_API="http://localhost:3000"
 
 echo "=== 1. Fetch IDs (property, guide) ==="
 PROP_ID=$(curl -s "$USER_API/properties?limit=1" | node -e "let d='';process.stdin.on('data',c=>d+=c).on('end',()=>{const j=JSON.parse(d); const p=j.properties||j; console.log(Array.isArray(p)?p[0]?.id:'')})")

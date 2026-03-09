@@ -54,8 +54,8 @@ cp .env.example .env
 # Edit .env with production values:
 # - DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME
 # - JWT_SECRET (use a strong secret)
-# - PORT=3001 (or your preferred port)
-# - FRONTEND_URL=https://everstays.in,https://admin.everstays.in
+# - PORT=3000 (or your preferred port)
+# - FRONTEND_URL=https://live.everstays.in,https://www.live.everstays.in
 
 # Build the application
 npm run build
@@ -201,7 +201,7 @@ server {
     server_name api.everstays.in;
 
     location / {
-        proxy_pass http://localhost:3001;
+        proxy_pass http://localhost:3000;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -306,11 +306,11 @@ DB_NAME=everstays_prod
 JWT_SECRET=your-very-strong-secret-key-here
 
 # Server
-PORT=3001
+PORT=3000
 NODE_ENV=production
 
 # CORS - Add your frontend URLs
-FRONTEND_URL=https://everstays.in,https://admin.everstays.in,https://www.everstays.in
+FRONTEND_URL=https://live.everstays.in,https://admin.everstays.in,https://www.live.everstays.in
 ```
 
 ### User Frontend (.env)
@@ -407,7 +407,7 @@ psql -U your_db_user everstays_prod < backup_20240101.sql
 pm2 list
 
 # Check ports
-netstat -tulpn | grep -E '3001|5173|5174'
+netstat -tulpn | grep -E '3000|5173|5174'
 
 # Check Nginx
 sudo systemctl status nginx
@@ -441,5 +441,5 @@ sudo tail -f /var/log/nginx/access.log
 - [ ] SSL certificates installed
 - [ ] PM2 configured to start on reboot
 - [ ] Database backups scheduled
-- [ ] Firewall configured (allow ports 80, 443, 3001)
+- [ ] Firewall configured (allow ports 80, 443, 3000)
 - [ ] Monitoring set up

@@ -85,7 +85,7 @@ server {
     proxy_send_timeout 300s;
 
     location / {
-        proxy_pass http://localhost:3001;
+        proxy_pass http://localhost:3000;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -274,7 +274,7 @@ sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 
 ### Test Backend API:
 ```bash
-curl http://localhost:3001
+curl http://localhost:3000
 # or
 curl http://api.everstays.in
 ```
@@ -370,7 +370,7 @@ sudo tail -f /var/log/nginx/access.log
 ### 502 Bad Gateway:
 1. Check if backend is running: `pm2 list`
 2. Check backend logs: `pm2 logs everstays-backend`
-3. Verify backend is listening on port 3001: `netstat -tulpn | grep 3001`
+3. Verify backend is listening on port 3000: `netstat -tulpn | grep 3000`
 4. Check Nginx error log: `sudo tail -f /var/log/nginx/error.log`
 
 ### 403 Forbidden:
@@ -418,7 +418,7 @@ server {
     server_name your-server-ip;
     
     location /api {
-        proxy_pass http://localhost:3001;
+        proxy_pass http://localhost:3000;
         # ... proxy settings
     }
     

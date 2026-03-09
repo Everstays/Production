@@ -167,9 +167,15 @@ return () => {
         if (response.ok) {
           const data = await response.json();
           setCities(Array.isArray(data) ? data : []);
+        } else {
+          console.error('Error fetching cities: HTTP', response.status, response.statusText);
+          // Set empty array as fallback
+          setCities([]);
         }
       } catch (error) {
         console.error('Error fetching cities:', error);
+        // Set empty array as fallback so the UI doesn't break
+        setCities([]);
       }
     };
 

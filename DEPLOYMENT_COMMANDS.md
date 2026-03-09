@@ -72,7 +72,7 @@ DB_USERNAME=your_user
 DB_PASSWORD=your_password
 DB_NAME=everstays_prod
 JWT_SECRET=your-secret-key
-PORT=3001
+PORT=3000
 FRONTEND_URL=https://everstays.in,https://admin.everstays.in
 ```
 

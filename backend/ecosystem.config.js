@@ -6,7 +6,7 @@ module.exports = {
     exec_mode: 'fork', // 'fork' for single instance, 'cluster' for load balancing
     env: {
       NODE_ENV: 'development',
-      PORT: 3001
+      PORT: 3000
     },
     env_production: {
       NODE_ENV: 'production',

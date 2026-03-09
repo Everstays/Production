@@ -44,9 +44,9 @@ DB_USERNAME=your_db_user
 DB_PASSWORD=your_db_password
 DB_NAME=everstays_prod
 JWT_SECRET=your-very-strong-secret-key
-PORT=3001
+PORT=3000
 NODE_ENV=production
-FRONTEND_URL=https://everstays.in,https://admin.everstays.in
+FRONTEND_URL=https://live.everstays.in,https://live.everstays.in
 ```
 
 ### Step 1.5: Install Dependencies and Build
@@ -83,7 +83,7 @@ pm2 list
 pm2 logs everstays-backend
 
 # Test API
-curl http://localhost:3001
+curl http://localhost:3000
 ```
 
 ## Part 2: Nginx Setup for Frontends
@@ -241,7 +241,7 @@ sudo tail -f /var/log/nginx/error.log
 ### Step 4.3: Test Endpoints
 ```bash
 # Backend API
-curl http://localhost:3001
+curl http://localhost:3000
 curl http://api.everstays.in
 
 # User Frontend (in browser)
@@ -276,7 +276,7 @@ sudo systemctl status nginx # Check status
 ### Backend not accessible:
 1. Check PM2: `pm2 list`
 2. Check logs: `pm2 logs everstays-backend`
-3. Check port: `netstat -tulpn | grep 3001`
+3. Check port: `netstat -tulpn | grep 3000`
 4. Check .env file exists and is correct
 
 ### Frontend showing 502:
@@ -298,7 +298,7 @@ sudo systemctl status nginx # Check status
 
 - [ ] PM2 installed and backend running
 - [ ] PM2 startup configured
-- [ ] Backend accessible on port 3001
+- [ ] Backend accessible on port 3000
 - [ ] Nginx installed and running
 - [ ] Frontends built successfully
 - [ ] Nginx configuration updated with correct paths

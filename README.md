@@ -16,7 +16,7 @@ apps/
 │   ├── public/
 │   ├── package.json
 │   └── node_modules/
-└── backend/          # Unified API for both apps - port 3001
+└── backend/          # Unified API for both apps - port 3000
     ├── src/
     ├── package.json
     ├── .env
@@ -36,20 +36,20 @@ apps/
    ```bash
    cd apps/backend && cp .env.example .env   # if needed
    cd apps/backend && npm run start:dev
-   # API at http://localhost:3001
+   # API at http://localhost:3000
    ```
 
 3. **User App** (can run together with Admin):
    ```bash
    cd apps/user && npm run dev
    ```
-   `http://localhost:5173` → uses backend (3001)
+   `http://localhost:5173` → uses backend (3000)
 
 4. **Admin App** (can run together with User; both use the same backend):
    ```bash
    cd apps/admin && npm run dev
    ```
-   `http://localhost:5174` → uses backend (3001)
+   `http://localhost:5174` → uses backend (3000)
 
 You can run the User and Admin apps at the same time; the backend accepts requests from both.
 
@@ -57,7 +57,7 @@ You can run the User and Admin apps at the same time; the backend accepts reques
 
 | App      | Port | Purpose                 |
 |----------|------|-------------------------|
-| backend  | 3001 | Unified API (user + admin) |
+| backend  | 3000 | Unified API (user + admin) |
 | user     | 5173 | Traveler frontend       |
 | admin    | 5174 | Host dashboard          |
 
