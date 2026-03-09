@@ -57,15 +57,17 @@ check_env_file() {
 
 # Function to validate backend environment variables
 validate_backend_env() {
-    if [ ! -f "backend/.env" ]; then
-        echo -e "${RED}❌ Error: backend/.env not found!${NC}"
+    local env_path=$1
+    if [ ! -f "$env_path" ]; then
+        echo -e "${RED}❌ Error: $env_path not found!${NC}"
+        echo -e "${YELLOW}   Current directory: $(pwd)${NC}"
         echo -e "${YELLOW}   Required variables: DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME, JWT_SECRET${NC}"
         return 1
     fi
     
     # Check for required variables (basic check)
-    if ! grep -q "DB_HOST=" backend/.env || ! grep -q "DB_PASSWORD=" backend/.env; then
-        echo -e "${YELLOW}⚠️  Warning: Some required environment variables may be missing in backend/.env${NC}"
+    if ! grep -q "DB_HOST=" "$env_path" || ! grep -q "DB_PASSWORD=" "$env_path"; then
+        echo -e "${YELLOW}⚠️  Warning: Some required environment variables may be missing in $env_path${NC}"
     fi
     
     return 0
@@ -73,12 +75,48 @@ validate_backend_env() {
 
 deploy_backend() {
     echo -e "${BLUE}📦 Deploying Backend...${NC}"
-    cd backend
-
-    # Validate environment file
-    if ! validate_backend_env; then
+    
+    # Get script directory (where deploy.sh is located)
+    local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    local backend_dir="$script_dir/backend"
+    local env_file="$backend_dir/.env"
+    
+    # Check if backend directory exists - try multiple locations
+    if [ ! -d "$backend_dir" ]; then
+        # Try relative path from current directory
+        if [ -d "backend" ]; then
+            backend_dir="$(cd backend && pwd)"
+        elif [ -d "./backend" ]; then
+            backend_dir="$(cd ./backend && pwd)"
+        else
+            echo -e "${RED}❌ Error: Backend directory not found!${NC}"
+            echo -e "${YELLOW}   Checked: $backend_dir${NC}"
+            echo -e "${YELLOW}   Also checked: ./backend${NC}"
+            echo -e "${YELLOW}   Current directory: $(pwd)${NC}"
+            return 1
+        fi
+    fi
+    
+    # Change to backend directory first
+    cd "$backend_dir" || {
+        echo -e "${RED}❌ Error: Cannot change to backend directory: $backend_dir${NC}"
+        return 1
+    }
+    
+    # Now check for .env file (we're now in the backend directory)
+    if [ ! -f ".env" ]; then
+        echo -e "${RED}❌ Error: .env file not found in backend directory!${NC}"
+        echo -e "${YELLOW}   Backend directory: $(pwd)${NC}"
+        echo -e "${YELLOW}   Expected: $(pwd)/.env${NC}"
+        echo -e "${YELLOW}   Please create .env file with required environment variables.${NC}"
+        cd "$script_dir" 2>/dev/null || cd .. 2>/dev/null || true
+        return 1
+    fi
+    
+    # Validate environment file (now we're in backend directory, so .env is relative)
+    if ! validate_backend_env ".env"; then
         echo -e "${RED}❌ Backend deployment aborted.${NC}"
-        cd ..
+        cd "$script_dir" 2>/dev/null || cd .. 2>/dev/null || true
         return 1
     fi
 
@@ -148,7 +186,8 @@ deploy_backend() {
         return 1
     fi
 
-    cd ..
+    # Return to script directory
+    cd "$script_dir" 2>/dev/null || cd .. 2>/dev/null || true
     echo -e "${GREEN}✅ Backend deployed successfully!${NC}"
     echo ""
 }
