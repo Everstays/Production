@@ -20,25 +20,40 @@ NC='\033[0m' # No Color
 deploy_backend() {
     echo -e "${BLUE}📦 Building Backend...${NC}"
     cd backend
-    
+
     echo "Installing dependencies..."
-    npm install --production
-    
+    npm install
+
     echo "Building application..."
     npm run build
-    
+
     echo "Checking if PM2 process exists..."
-    if pm2 list | grep -q "everstays-backend"; then
-        echo -e "${YELLOW}Restarting existing backend process...${NC}"
-        pm2 restart everstays-backend
+    # Delete the process if it exists (stopped or running) to avoid restart issues
+    if pm2 describe everstays-backend &>/dev/null; then
+        echo -e "${YELLOW}Removing existing backend process...${NC}"
+        pm2 delete everstays-backend 2>/dev/null || true
+    fi
+
+    # Start the application fresh
+    echo -e "${GREEN}Starting backend process...${NC}"
+    if [ -f "ecosystem.config.js" ]; then
+        pm2 start ecosystem.config.js --env production
     else
-        echo -e "${GREEN}Starting new backend process...${NC}"
         pm2 start dist/main.js --name "everstays-backend" --env production
     fi
-    
+
+    if [ $? -eq 0 ]; then
+        echo -e "${GREEN}✓ Process started successfully${NC}"
+        pm2 save
+    else
+        echo -e "${RED}✗ Failed to start process${NC}"
+        exit 1
+    fi
+
     cd ..
     echo -e "${GREEN}✅ Backend deployed successfully!${NC}"
     echo ""
+
 }
 
 deploy_user() {

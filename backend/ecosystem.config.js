@@ -10,7 +10,7 @@ module.exports = {
     },
     env_production: {
       NODE_ENV: 'production',
-      PORT: 3001
+      PORT: 3000
     },
     error_file: './logs/pm2-error.log',
     out_file: './logs/pm2-out.log',
