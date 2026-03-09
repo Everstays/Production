@@ -23,7 +23,7 @@ export default function CityDiscovery({ onCitySelect }: CityDiscoveryProps) {
         setIsLoading(true);
         setError('');
         
-        const response = await fetch(`${API_BASE_URL}/cities`, {
+        const response = await fetch(`${API_BASE_URL}:3000/cities`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export default function CityDiscovery({ onCitySelect }: CityDiscoveryProps) {
         console.error('Error fetching cities:', err);
         // Only show error if it's a network/API error, not if it's just empty
         if (err.message && err.message.includes('Failed to fetch')) {
-          setError(`Cannot connect to server. Ensure the backend is running at ${API_BASE_URL}. Open this app at http://localhost:5173 and click Retry.`);
+          setError(`Cannot connect to server. Ensure the backend is running at ${API_BASE_URL}. Open this app at http://localhost:3001 and click Retry.`);
         } else {
           setError('Failed to load cities. ' + (err.message || ''));
         }

@@ -26,7 +26,7 @@ let UploadsController = class UploadsController {
         if (!file) {
             throw new common_1.BadRequestException('No file provided');
         }
-        const baseUrl = process.env.API_BASE_URL || 'http://localhost:3001';
+        const baseUrl = process.env.API_BASE_URL || 'http://localhost:3000';
         const url = `${baseUrl}/uploads/${file.filename}`;
         return { url };
     }

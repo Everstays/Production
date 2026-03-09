@@ -94,6 +94,6 @@ echo ""
 echo "Next steps:"
 echo "  - Check application status: pm2 list"
 echo "  - View logs: pm2 logs everstays-backend"
-echo "  - Test API: curl http://localhost:3001"
+echo "  - Test API: curl http://localhost:3000"
 echo ""
 
