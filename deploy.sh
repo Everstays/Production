@@ -124,8 +124,8 @@ deploy_backend() {
     mkdir -p logs
 
     if [ "$SKIP_BUILD" = false ]; then
-        echo "Installing dependencies..."
-        npm install --production
+        echo "Installing dependencies (including devDependencies for build)..."
+        npm install
 
         echo "Building application..."
         npm run build
