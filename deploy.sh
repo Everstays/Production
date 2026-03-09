@@ -124,7 +124,8 @@ deploy_backend() {
     mkdir -p logs
 
     if [ "$SKIP_BUILD" = false ]; then
-        echo "Installing dependencies (including devDependencies for build)..."
+        echo "Cleaning and installing dependencies..."
+        rm -rf node_modules package-lock.json
         npm install
 
         echo "Building application..."
