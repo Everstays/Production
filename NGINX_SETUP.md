@@ -108,7 +108,7 @@ server {
 # User Frontend - Static Files
 server {
     listen 80;
-    server_name everstays.in www.everstays.in;  # Replace with your domain or IP
+    server_name live.everstays.in www.live.everstays.in;  # Replace with your domain or IP
 
     root /path/to/everstays/Production/user/dist;  # Update this path
     index index.html;
@@ -280,10 +280,10 @@ curl http://api.everstays.in
 ```
 
 ### Test User Frontend:
-Open in browser: `http://everstays.in` or `http://your-server-ip`
+Open in browser: `http://live.everstays.in` or `http://3.7.202.132`
 
 ### Test Admin Frontend:
-Open in browser: `http://admin.everstays.in` or `http://your-server-ip:80`
+Open in browser: `http://admin.everstays.in` or `http://3.7.202.132:80`
 
 ## Step 13: Set Up SSL with Let's Encrypt (Recommended for Production)
 
@@ -298,7 +298,7 @@ sudo yum install certbot python3-certbot-nginx
 
 ### Obtain SSL Certificates:
 ```bash
-sudo certbot --nginx -d api.everstays.in -d everstays.in -d www.everstays.in -d admin.everstays.in
+sudo certbot --nginx -d api.everstays.in -d live.everstays.in -d www.live.everstays.in -d admin.everstays.in
 ```
 
 Follow the prompts to:
