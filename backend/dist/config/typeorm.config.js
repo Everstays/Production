@@ -23,6 +23,14 @@ const notification_entity_1 = require("../entities/notification.entity");
 const experience_review_entity_1 = require("../entities/experience-review.entity");
 const getTypeOrmConfig = () => {
     const password = process.env.DB_PASSWORD || '';
+    const dbHost = process.env.DB_HOST || 'localhost';
+    const sslConfig = dbHost.includes('neon.tech') || 
+                    dbHost.includes('aws.neon.tech') || 
+                    dbHost.includes('supabase') ||
+                    dbHost.includes('.rds.amazonaws.com') ||
+                    process.env.DB_SSL === 'true'
+                    ? { rejectUnauthorized: false } // Allow self-signed certificates for cloud services
+    : false;
     return {
         type: 'postgres',
         host: process.env.DB_HOST || 'localhost',
@@ -33,6 +41,7 @@ const getTypeOrmConfig = () => {
         entities: [user_entity_1.User, property_entity_1.Property, booking_entity_1.Booking, review_entity_1.Review, offer_entity_1.Offer, city_entity_1.City, message_entity_1.Message, experience_entity_1.Experience, contact_entity_1.Contact, category_entity_1.Category, holiday_entity_1.Holiday, guide_entity_1.Guide, cab_entity_1.Cab, cab_request_entity_1.CabRequest, trip_plan_item_entity_1.TripPlanItem, tab_badge_entity_1.TabBadge, guide_review_entity_1.GuideReview, guide_booking_entity_1.GuideBooking, notification_entity_1.Notification, experience_review_entity_1.ExperienceReview],
         synchronize: process.env.NODE_ENV !== 'production',
         logging: process.env.NODE_ENV === 'development',
+        ssl: sslConfig,
         extra: {
             ...(password === '' && { trustLocalhost: true }),
         },
